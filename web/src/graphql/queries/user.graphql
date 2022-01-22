@@ -1,0 +1,8 @@
+query User($id: Int!) {
+  user(id: $id) {
+    id
+    username 
+    role
+    active
+  }
+}

@@ -1,0 +1,5 @@
+query UsersDurations {
+  usersdurations {
+    sum
+  }
+}

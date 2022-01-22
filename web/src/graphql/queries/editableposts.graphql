@@ -1,0 +1,8 @@
+query EditablePosts( $limit: Int!, $cursor: String) {
+  editableposts(limit: $limit, cursor: $cursor) {
+    hasMore
+    posts {
+      ...PostSnippet
+    }
+  }
+}

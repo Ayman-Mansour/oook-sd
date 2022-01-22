@@ -1,0 +1,10 @@
+query UserVotedPosts($updaterId: Int!, $limit: Int!, $cursor: String) {
+  uservotedposts(updaterId: $updaterId, limit: $limit, cursor: $cursor) {
+    hasMore
+    votedposts{
+      value
+      userId
+      postId
+    }
+  }
+}

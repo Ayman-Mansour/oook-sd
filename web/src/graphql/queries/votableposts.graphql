@@ -1,0 +1,8 @@
+query VottablePosts( $limit: Int!, $cursor: String) {
+  votableposts(limit: $limit, cursor: $cursor) {
+    hasMore
+    posts {
+      ...PostSnippet
+    }
+  }
+}

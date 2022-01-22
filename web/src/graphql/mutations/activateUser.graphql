@@ -1,0 +1,3 @@
+mutation ActivateUser($id: Int!) {
+  activateuser(id: $id)
+}

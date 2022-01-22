@@ -1,0 +1,5 @@
+query UserDurations($updaterId: Int!) {
+  userdurations(updaterId: $updaterId) {
+    sum
+  }
+}
