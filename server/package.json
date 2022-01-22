@@ -1,6 +1,7 @@
 {
-  "name": "lireddit-server",
+  "name": "oook-sd-server",
   "version": "1.0.0",
+  "homepage": "https://api.oook.sd",
   "description": "",
   "main": "index.js",
   "scripts": {
