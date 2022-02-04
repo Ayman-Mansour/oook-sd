@@ -2,9 +2,9 @@
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
-  "username": "postgres",
-  "password": "postgres",
-  "database": "oook_sd_db",
+  "username": "aymanman_oook_sd_db-admin",
+  "password": "admin777@@@@",
+  "database": "aymanman_oook_sd_db",
   "entities": ["dist/entities/*.js"],
   "migrations": ["dist/migrations/*.js"]
 }

@@ -2,3 +2,9 @@ ssr
     browser -> next.js -> graphql api
 client side
     browser -> graphql api
+
+DATABASE_URL=postgresql://aymanman_oook_sd_db-admin:admin777@@@@localhost:5432/aymanman_oook_sd_db
+REDIS_URL=127.0.0.1:6379
+PORT=4000
+SESSION_SECRET=qowiueojwojfalksdjoqiwueo
+CORS_ORIGIN=https://oook.sd

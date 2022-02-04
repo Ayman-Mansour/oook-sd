@@ -1,10 +1,14 @@
 {
   "name": "oook-sd",
   "version": "0.1.0",
-  "private": true,
+  "homepage": "https://oook.sd",
+  "description": "",
+  "private":"true",
+
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "gen": "graphql-codegen --config codegen.yml"
   },

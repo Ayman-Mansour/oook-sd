@@ -12,13 +12,14 @@ import {
 } from "type-graphql";
 import { MyContext } from "../types";
 import { User } from "../entities/User";
-import argon2 from "argon2";
 import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from "../constants";
 import { UsernamePasswordInput } from "./UsernamePasswordInput";
 import { validateRegister } from "../utils/validateRegister";
 import { sendEmail } from "../utils/sendEmail";
 import { v4 } from "uuid";
 import { getConnection } from "typeorm";
+
+var passwordHash = require('password-hash');
 
 @ObjectType()
 class FieldError {
@@ -99,7 +100,8 @@ export class UserResolver {
     await User.update(
       { id: userIdNum },
       {
-        password: await argon2.hash(newPassword),
+        password: await passwordHash.generate(newPassword),
+        // password: await argon2.hash(newPassword),
       }
     );
 
@@ -134,7 +136,7 @@ export class UserResolver {
     await sendEmail(
       email,
       `Dear ${user.username} , <br /> Click on the following link to create new password for you oook account: 
-      <br /> <a href="http://localhost:3000/change-password/${token}">Reset password</a> 
+      <br /> <a href="https://oook.sd/Account/change-password/${token}">Reset password</a> 
       <br /> Note: This link will be functional for a one time use or 3 days (whichever is earlier) 
       <br /> With regards, <br /> OOOK Team.`
     );
@@ -227,8 +229,8 @@ export class UserResolver {
     if (errors) {
       return { errors };
     }
-
-    const hashedPassword = await argon2.hash(options.password);
+    const hashedPassword = await passwordHash.generate(options.password);
+    // const hashedPassword = await argon2.hash(options.password);
     let user;
     try {
       // User.create({}).save()
@@ -291,7 +293,13 @@ export class UserResolver {
         ],
       };
     }
-    const valid = await argon2.verify(user.password, password);
+    // const hashedPassword = await passwordHash.generate(password);
+    const valid = await passwordHash.verify(password, user.password);
+    console.log("input pass : ",password);
+    console.log("user pass : ",user.password);
+    // console.log("hashed pass : ",hashedPassword);
+    
+    // const valid = await argon2.verify(user.password, password);
     if (!valid) {
       return {
         errors: [

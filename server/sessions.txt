@@ -22,3 +22,5 @@ server makes a request to redis
 sess:qwoeiuowqjoqjw -> { userId: 1 }
 
 req.session = { userId: 1 }
+
+DATABASE_URL	postgresql://aymanman_oook_sd_db-admin:admin777@@@@localhost:5432/aymanman_oook_sd_db	

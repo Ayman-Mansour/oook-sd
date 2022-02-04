@@ -12,7 +12,7 @@ import { calculateTime } from "../utils/calculateTime";
 export const AllUsersPostsDurations = () => {
   const [{ data: durData }] = useUsersDurationsQuery();
   var usersduration = durData?.usersdurations[0].sum as number;
-  var allpostsduration = 172041 as number;
+  var allpostsduration = 172042 as number;
   var percentage = (usersduration / allpostsduration) * 100;
   return (
     <Flex dir="column" m={2} align={"center"}>

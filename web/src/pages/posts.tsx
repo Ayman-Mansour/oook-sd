@@ -150,7 +150,7 @@ const Posts = () => {
                 !p ? null : (
                   <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
                     <Box flex={1} alignSelf="center">
-                      <NextLink href="/post/[id]" as={`/post/${p.id}`}>
+                      <NextLink href="/post?uri=[id]" as={`/post/${p.id}`}>
                         <Link>
                           <Heading fontSize="xl">{p.title}</Heading>
                         </Link>

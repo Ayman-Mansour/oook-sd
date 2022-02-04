@@ -4,7 +4,7 @@ export class initData1641889283855 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`
-        insert into "user" ("username", phone, email, password, role, active) values ('admin','0900000000','admin@admin','$argon2i$v=19$m=4096,t=3,p=1$Q746picPh0hpryid+OvpIw$jds11tuguGIHDpjsnasGb+vYI726PiWHsZqqCfCZ8HQ','admin',1)`)
+        insert into "user" ("username", phone, email, password, role, active) values ('admin','0900000000','admin@admin','sha1$2d217ccd$1$981de301260a336924fd4e16f3c04b76d6132cb3','admin',1)`)
         await queryRunner.query(`
         insert into post (title, text, duration, "creatorId", "updaterId", "createdAt") values ('_45sS3h7BNQ_000773-001523','',7.5,1,1,'2022-04-03T08:04:37Z');
         insert into post (title, text, duration, "creatorId", "updaterId", "createdAt") values ('_45sS3h7BNQ_001961-002355','',3.94,1,1,'2022-06-25T01:52:22Z');

@@ -9,7 +9,7 @@ import { PostResolver } from "./resolvers/post";
 import { UserResolver } from "./resolvers/user";
 import Redis from "ioredis";
 import session from "express-session";
-import connectRedis from "connect-redis";
+// import connectRedis from "connect-redis";
 import cors from "cors";
 import { createConnection } from "typeorm";
 import { Post } from "./entities/Post";
@@ -18,7 +18,7 @@ import path from "path";
 import { Updoot } from "./entities/Updoot";
 import { createUserLoader } from "./utils/createUserLoader";
 import { createUpdootLoader } from "./utils/createUpdootLoader";
-
+// import {} from "express-mysql-session";
 const main = async () => {
   const conn = await createConnection({
     type: "postgres",
@@ -33,8 +33,19 @@ const main = async () => {
   // await Post.delete({});
 
   const app = express();
+  const MySQLStore = require('express-mysql-session')(session);
 
-  const RedisStore = connectRedis(session);
+  var options = {
+    host: 'localhost',
+    port: 3306,
+    user: 'aymanman_session_db_user',
+    password: 'admin777@@@',
+    database: 'aymanman_sessions_db'
+  };
+  
+  const sessionStore = new MySQLStore(options);
+
+  // const RedisStore = connectRedis(session);
   const redis = new Redis(process.env.REDIS_URL);
   app.set("trust proxy", 1);
   app.use(
@@ -46,16 +57,13 @@ const main = async () => {
   app.use(
     session({
       name: COOKIE_NAME,
-      store: new RedisStore({
-        client: redis,
-        disableTouch: true,
-      }),
+      store: sessionStore,
       cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
         httpOnly: true,
         sameSite: "lax", // csrf
         secure: __prod__, // cookie only works in https
-        domain: __prod__ ? ".codeponder.com" : undefined,
+        domain: __prod__ ? ".oook.sd" : undefined,
       },
       saveUninitialized: false,
       secret: process.env.SESSION_SECRET,

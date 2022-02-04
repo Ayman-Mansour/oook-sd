@@ -110,7 +110,7 @@ export const UserPosts: React.FC<UserPostsprop> = ({
                   <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
                     {/* <UpdootSection post={p} /> */}
                     <Box flex={1}>
-                      <NextLink href="/post/[id]" as={`/post/${p.id}`}>
+                      <NextLink href="/post?uri=[id]" as={`/post/${p.id}`}>
                         <Link>
                           <Heading fontSize="xl">{p.title}</Heading>
                         </Link>

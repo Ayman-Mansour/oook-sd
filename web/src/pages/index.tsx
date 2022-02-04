@@ -78,7 +78,7 @@ const Index = () => {
                   {/* <UpdootSection post={p} /> */}
                   {console.log("Durations : ", data?.posts.posts)}
                   <Box flexWrap="inherit">
-                    <NextLink href="/post/[id]" as={`/post/${p.id}`}>
+                    <NextLink href="/post?uri=[id]" as={`/post/${p.id}`}>
                       <Link>
                         <Heading fontSize="xl">{p.title}</Heading>
                       </Link>

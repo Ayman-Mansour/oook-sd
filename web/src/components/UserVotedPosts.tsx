@@ -51,7 +51,7 @@ export const UserVotedrPosts: React.FC<UserVotedPostsprop> = ({
                   <Flex key={data?.post?.id} p={5} shadow="md" borderWidth="1px">
                     {/* <UpdootSection post={p} /> */}
                     <Box flex={1}>
-                      <NextLink href="/post/[id]" as={`/post/${data?.post?.id}`}>
+                      <NextLink href="/post?uri=[id]" as={`/post/${data?.post?.id}`}>
                         <Link>
                           <Heading fontSize="xl">{data?.post?.title}</Heading>
                         </Link>

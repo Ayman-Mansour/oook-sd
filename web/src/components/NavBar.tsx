@@ -90,14 +90,15 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
             
           </IconButton>
         </NextLink> */}
-          <NextLink href="/editable-posts">
-            <Tooltip
+         {/* <Tooltip
               aria-label=""
               hasArrow
               label="Availavbe posts "
               bg="orange.100"
               color="black"
-            >
+            >  */}
+            <NextLink href="/editable-posts">
+            
               <IconButton
                 aria-label="updoot post"
                 icon="drag-handle"
@@ -105,8 +106,9 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
                 mr={4}
                 bg={"orange.200"}
               ></IconButton>
-            </Tooltip>
+            
           </NextLink>
+          {/* </Tooltip> */}
         </Box>
         <Box mr={2}>
           <NextLink href="/posts">

@@ -160,7 +160,7 @@ const EditablePosts = () => {
                   }}}</Text>  */}
                   {/* <UpdootSection post={p} /> */}
                   <Box flexWrap="inherit">
-                    <NextLink href="/post/[id]" as={`/post/${vp.id}`}>
+                    <NextLink href="/post?uri=[id]" as={`/post/${vp.id}`}>
                       <Link>
                         <Heading fontSize="xl">{vp.title}</Heading>
                       </Link>
@@ -239,7 +239,7 @@ const EditablePosts = () => {
                   }}}</Text>  */}
                   {/* <UpdootSection post={p} /> */}
                   <Box flexWrap="inherit">
-                    <NextLink href="/post/[id]" as={`/post/${p.id}`}>
+                    <NextLink href="/post?uri=[id]" as={`/post/${p.id}`}>
                       <Link>
                         <Heading fontSize="xl">{p.title}</Heading>
                       </Link>
