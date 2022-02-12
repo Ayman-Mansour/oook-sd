@@ -18,7 +18,8 @@ import path from "path";
 import { Updoot } from "./entities/Updoot";
 import { createUserLoader } from "./utils/createUserLoader";
 import { createUpdootLoader } from "./utils/createUpdootLoader";
-// import {} from "express-mysql-session";
+// import {MySQLStore} from "express-mysql-session";
+// import https from "https"
 const main = async () => {
   const conn = await createConnection({
     type: "postgres",
@@ -31,6 +32,7 @@ const main = async () => {
   await conn.runMigrations();
 
   // await Post.delete({});
+  // const fs = require('fs')
 
   const app = express();
   const MySQLStore = require('express-mysql-session')(session);
@@ -38,9 +40,9 @@ const main = async () => {
   var options = {
     host: 'localhost',
     port: 3306,
-    user: 'aymanman_session_db_user',
+    user: 'ession_db_user',
     password: 'admin777@@@',
-    database: 'aymanman_sessions_db'
+    database: 'session_db'
   };
   
   const sessionStore = new MySQLStore(options);
@@ -75,6 +77,7 @@ const main = async () => {
     schema: await buildSchema({
       resolvers: [HelloResolver, PostResolver, UserResolver],
       validate: false,
+
     }),
     context: ({ req, res }) => ({
       req,
@@ -84,15 +87,26 @@ const main = async () => {
       updootLoader: createUpdootLoader(),
     }),
   });
+  // ----------------------------------------------------------------
+  // const manualServer = https.createServer(
+  //   {
+  //     key: fs.readFileSync(`./key.pem`),
+  //     cert: fs.readFileSync(`./cert.pem`),
+  //   },
+  //   app,
+  // );
+  // ----------------------------------------------------------------
 
   apolloServer.applyMiddleware({
     app,
     cors: false,
-  });
+  }); 
+  // manualServer.listen(parseInt(process.env.PORT));
 
   app.listen(parseInt(process.env.PORT), () => {
     console.log("server started on localhost:4000");
   });
+  
 };
 
 main().catch((err) => {
