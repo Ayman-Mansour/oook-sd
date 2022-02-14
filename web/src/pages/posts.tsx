@@ -132,9 +132,9 @@ const Posts = () => {
                 >
                   <Box>
                     <Heading fontSize="xl">Name : {meData.me.username}</Heading>
-                    <Heading fontSize="xl">
+                    {/* <Heading fontSize="xl">
                       Submited posts : {data?.userposts.posts.length} post/s
-                    </Heading>
+                    </Heading> */}
                     <Heading fontSize="xl">
                       <UserPostsDurations updaterId={meData.me.id} />
                     </Heading>

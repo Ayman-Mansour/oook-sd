@@ -122,7 +122,7 @@ const Index = () => {
             onClick={() => {
               setVariables({
                 limit: variables.limit,
-                cursor: data.posts.posts[data.posts.posts.length - 1].updatedAt,
+                cursor: data.posts.posts[data.posts.posts.length - 1].createdAt,
               });
             }}
             isLoading={fetching}

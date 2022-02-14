@@ -22,7 +22,7 @@ export type Query = {
   editableposts: PaginatedPosts;
   votableposts: PaginatedPosts;
   usersdurations: Array<Sum>;
-  userdurations: Array<Sum>;
+  userdurations: Array<SumCount>;
   me?: Maybe<User>;
   user: Array<User>;
   users?: Maybe<Array<User>>;
@@ -125,6 +125,12 @@ export type Updoot = {
 export type Sum = {
   __typename?: 'Sum';
   sum: Scalars['Float'];
+};
+
+export type SumCount = {
+  __typename?: 'SumCount';
+  sum: Scalars['Float'];
+  count: Scalars['Float'];
 };
 
 export type Mutation = {
@@ -487,8 +493,8 @@ export type UserDurationsQueryVariables = Exact<{
 export type UserDurationsQuery = (
   { __typename?: 'Query' }
   & { userdurations: Array<(
-    { __typename?: 'Sum' }
-    & Pick<Sum, 'sum'>
+    { __typename?: 'SumCount' }
+    & Pick<SumCount, 'sum' | 'count'>
   )> }
 );
 
@@ -812,6 +818,7 @@ export const UserDurationsDocument = gql`
     query UserDurations($updaterId: Int!) {
   userdurations(updaterId: $updaterId) {
     sum
+    count
   }
 }
     `;

@@ -55,12 +55,19 @@ class PaginatedPosts {
   hasMore: boolean;
 }
 
-
 @ObjectType()
 class Sum {
   @Field(() => Float)
     sum:number;
-  
+    
+}
+
+@ObjectType()
+class SumCount {
+  @Field(() => Float)
+    sum:number;
+    @Field(() => Float)
+    count:number;
 }
 
 @ObjectType()
@@ -178,8 +185,8 @@ export class PostResolver {
       `
     select p.*
     from post p
-    ${cursor ? `where p."updatedAt" < $2` : ""}
-    order by p."updatedAt" DESC
+    ${cursor ? `where p."createdAt" < $2` : ""}
+    order by p."createdAt" DESC
     limit $1
     `,
       replacements
@@ -412,7 +419,7 @@ async usersdurations(
 
 // ------------------------------------------------------
 
-@Query(() => [Sum])
+@Query(() => [SumCount])
 async userdurations(
   @Arg("updaterId", () => Int) updaterId: number,
   // @Arg("limit", () => Int) limit: number,
@@ -429,17 +436,17 @@ async userdurations(
   //   replacements.push(new Date(parseInt(cursor)));
   // }
   // const replacements: any[] = [updaterId]
-  const durations = await getConnection().query(
+  const durations_count = await getConnection().query(
     `
-  select SUM(p.duration)
+  select SUM(p.duration), COUNT(p.duration)
   from post p 
    where p."updaterId" = ${updaterId }`
   // ,
   //   replacements
   );
-console.log("dura", durations[0]);
+console.log("dura", durations_count[0]);
 
-  return durations
+  return durations_count
 }
 
 // ------------------------------------------------------

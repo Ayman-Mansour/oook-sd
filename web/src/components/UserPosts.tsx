@@ -91,9 +91,9 @@ export const UserPosts: React.FC<UserPostsprop> = ({
                 >
                   <Box>
                     <Heading fontSize="xl">Name : {userData?.user[0].username}</Heading>
-                    <Heading fontSize="xl">
+                    {/* <Heading fontSize="xl">
                       Submited posts : {data?.userposts.posts.length} post/s
-                    </Heading>
+                    </Heading> */}
                     <Heading fontSize="xl">
                       <UserPostsDurations updaterId={userData?.user[0].id as number}/>
                     </Heading>

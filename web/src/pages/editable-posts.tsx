@@ -229,15 +229,6 @@ const EditablePosts = () => {
             {data?.editableposts.posts.map((p) => {
               return !p ? null : (
                 <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
-                  {/* <Text>Durations {duration.push(p?.duration)}</Text>  */}
-                  {/* <Text>Durations {async () =>{for (let index = 0; index < duration.length; index++) {
-                    const element = duration[index];
-                    console.log("Durations : ",element);
-                    
-                    // var sum=0.0
-                    // sum += element  
-                  }}}</Text>  */}
-                  {/* <UpdootSection post={p} /> */}
                   <Box flexWrap="inherit">
                     <NextLink href="/post?uri=[id]" as={`/post/${p.id}`}>
                       <Link>
@@ -259,11 +250,11 @@ const EditablePosts = () => {
                         {/* {async () => {
           if (p.updaterId == p.creator.id) { */}
                         <Flex ml={2}>
-                        <EditDeletePostButtons
-                          id={p.id}
-                          creatorId={p.creator.id}
-                          updaterId={p.updaterId}
-                        />
+                          <EditDeletePostButtons
+                            id={p.id}
+                            creatorId={p.creator.id}
+                            updaterId={p.updaterId}
+                          />
                         </Flex>
                       </Flex>
                       {/* }
