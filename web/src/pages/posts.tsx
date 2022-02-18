@@ -165,7 +165,6 @@ const Posts = () => {
                         <ReactAudioPlayer
                           src={audio_path + p.title + ".wav"}
                           controls
-                          loop
                         />
                         <Box ml={2}>
                           <EditDeletePostButtons
