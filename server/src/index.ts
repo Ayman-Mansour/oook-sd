@@ -18,6 +18,7 @@ import path from "path";
 import { Updoot } from "./entities/Updoot";
 import { createUserLoader } from "./utils/createUserLoader";
 import { createUpdootLoader } from "./utils/createUpdootLoader";
+import { Token } from "./entities/Token";
 // import {MySQLStore} from "express-mysql-session";
 // import https from "https"
 const main = async () => {
@@ -27,7 +28,7 @@ const main = async () => {
     logging: true,
     // synchronize: true,
     migrations: [path.join(__dirname, "./migrations/*")],
-    entities: [Post, User, Updoot],
+    entities: [Post, User, Updoot, Token],
   });
   await conn.runMigrations();
 

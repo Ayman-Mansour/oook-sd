@@ -57,7 +57,7 @@ export const EditDeletePostButtons: React.FC<EditDeletePostButtonsProps> = ({
   }
   return (
     <Box alignSelf={'center'}>
-      <NextLink href={url} as={url + id}>
+      <NextLink href={url + id} as={url + id}>
         <IconButton
           as={Link}
           mr={4}

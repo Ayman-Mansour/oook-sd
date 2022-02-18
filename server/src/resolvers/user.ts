@@ -18,8 +18,9 @@ import { validateRegister } from "../utils/validateRegister";
 import { sendEmail } from "../utils/sendEmail";
 import { v4 } from "uuid";
 import { getConnection } from "typeorm";
+import { Token } from "../entities/Token";
 
-var passwordHash = require('password-hash');
+var passwordHash = require("password-hash");
 
 @ObjectType()
 class FieldError {
@@ -55,23 +56,29 @@ export class UserResolver {
 
   @Mutation(() => UserResponse)
   async changePassword(
-    @Arg("token") token: string,
+    @Arg("token") _token: string,
     @Arg("newPassword") newPassword: string,
-    @Ctx() { redis, req }: MyContext
+    @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
-    if (newPassword.length <= 2) {
+    if (newPassword.length <= 5) {
       return {
         errors: [
           {
             field: "newPassword",
-            message: "length must be greater than 2",
+            message: "length must be greater than 5",
           },
         ],
       };
     }
 
-    const key = FORGET_PASSWORD_PREFIX + token;
-    const userId = await redis.get(key);
+    const key =  _token;
+    // const userId = await redis.get(key);
+    console.log("Token key :::::::::::::::::", key);
+
+    const userId = await Token.findOne({ where: { token: key } });
+
+    console.log("Token userId :::::::::::::::::", userId);
+
     if (!userId) {
       return {
         errors: [
@@ -83,7 +90,7 @@ export class UserResolver {
       };
     }
 
-    const userIdNum = parseInt(userId);
+    const userIdNum = userId.userId;
     const user = await User.findOne(userIdNum);
 
     if (!user) {
@@ -105,7 +112,9 @@ export class UserResolver {
       }
     );
 
-    await redis.del(key);
+    // await redis.del(key);
+
+    await Token.delete(userId.id);
 
     // log in user after change password
     req.session.userId = user.id;
@@ -115,8 +124,8 @@ export class UserResolver {
 
   @Mutation(() => Boolean)
   async forgotPassword(
-    @Arg("email") email: string,
-    @Ctx() { redis }: MyContext
+    @Arg("email") email: string
+    // @Ctx() { redis }: MyContext
   ) {
     const user = await User.findOne({ where: { email } });
     if (!user) {
@@ -125,19 +134,54 @@ export class UserResolver {
     }
 
     const token = v4();
+    let tken;
+    try {
+      // await Token.create({token: FORGET_PASSWORD_PREFIX + token,
+      //   userId: user.id,
+      //   experation: "ex",
+      //   date:  1000 * 60 * 60 * 24 * 3}).save()
+      const result = await getConnection()
+        .createQueryBuilder()
+        .insert()
+        .into(Token)
+        .values({
+          token: FORGET_PASSWORD_PREFIX + token,
+          userId: user.id,
+          experation: "ex",
+          date: 1000 * 60 * 60 * 24 * 3,
+        })
+        .returning("*")
+        .execute();
+      tken = result.raw[0];
+      console.log("Token", tken);
+    } catch (err) {
+      console.log("Token Error:::::::::::::::::", err.message);
 
-    await redis.set(
-      FORGET_PASSWORD_PREFIX + token,
-      user.id,
-      "ex",
-      1000 * 60 * 60 * 24 * 3
-    ); // 3 days
+      //|| err.detail.includes("already exists")) {
+      // duplicate username error
+      if (err) {
+        return {
+          errors: [
+            {
+              field: "Token Error",
+              message: "Did not save in db",
+            },
+          ],
+        };
+      }
+    }
+    // await redis.set(
+    //   FORGET_PASSWORD_PREFIX + token,
+    //   user.id,
+    //   "ex",
+    //   1000 * 60 * 60 * 24 * 3
+    // ); // 3 days
 
     await sendEmail(
       email,
-      `Dear ${user.username} , <br /> Click on the following link to create new password for you oook account: 
-      <br /> <a href="https://oook.sd/Account/change-password/${token}">Reset password</a> 
-      <br /> Note: This link will be functional for a one time use or 3 days (whichever is earlier) 
+      `Dear ${user.username} , <br /> Click on the following link to create new password for you oook account:
+      <br /> <a href="http://localhost:3000/Account/change-password/${token}">Reset password</a>
+      <br /> Note: This link will be functional for a one time use or 3 days (whichever is earlier)
       <br /> With regards, <br /> OOOK Team.`
     );
 
@@ -295,10 +339,10 @@ export class UserResolver {
     }
     // const hashedPassword = await passwordHash.generate(password);
     const valid = await passwordHash.verify(password, user.password);
-    console.log("input pass : ",password);
-    console.log("user pass : ",user.password);
+    console.log("input pass : ", password);
+    console.log("user pass : ", user.password);
     // console.log("hashed pass : ",hashedPassword);
-    
+
     // const valid = await argon2.verify(user.password, password);
     if (!valid) {
       return {
