@@ -65,6 +65,16 @@ const EditPost = ({}) => {
     );
   }
 
+  if (data?.post?.updaterId !== 1 && data?.post?.updaterId != meData.me.id ) {
+    return (
+      <Layout>
+        <Flex height={290}>
+        <Text color="Red">Sorry you are not authorized.. </Text>
+        </Flex>
+      </Layout>
+    );
+  }
+
   if (!data?.post) {
     return (
       <Layout>
