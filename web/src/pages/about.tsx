@@ -45,38 +45,39 @@ const About: React.FC<{}> = ({}) => {
               </Text>
             </Text>
             <Text>
-              The dialects of the Arabic language suffer from poor sources of
-              texts and spoken speech, due to the difficulty of obtaining them
-              together, or sometimes there is no computerized source of data,
-              which makes the task of collecting data difficult and arduous.{" "}
+              The Arabic language dialects suffer from poor text and speech
+              sources, due to the difficulty of obtaining them together, or
+              sometimes there is no computerized source of data, which makes the
+              task of collecting data very arduous.{" "}
             </Text>
             <Text>
               <Link
-                href="https://www.oook.sd"
+                href="https://oook.sd"
                 target="_blank"
                 rel="From oook.sd"
               >
                 <b> oook.sd</b>
               </Link>{" "}
               is an initiative to enrich colloquial content (Sudanese dialect)
-              in order to include it in the future in NLP research and the field
-              of linguistics. The initiative aims to limit Sudanese content
-              (speech and text) and facilitate access to it by researchers.
+              to include it in future NLP research and the field of linguistics.
+              The initiative aims to collect Sudanese content (speech and text)
+              and enable access to it by researchers.
             </Text>
             <Text>
-              The site contains 18,883 audio clips, equivalent to approximately
-              48 hours of Sudanese dialect programs and series{" "}
+              The site contains 18,883 audio clips around 48 hours of Sudanese
+              dialect programs and series{" "}
               <Link
                 href="https://swshon.github.io/pdf/shon_2020_adi17.pdf"
                 target="_blank"
                 rel="From oook.sd"
               >
-                <b>source</b>
+                <b>"source"</b>
               </Link>
-              , which have been counted and the text corresponding to each audio
-              clip will be written and collected together in a unified database,
-              allowing each researcher who aims to deal with the Sudanese
-              dialect in the future to pass the data collection stage.
+              , which have been gathered, and the text corresponding to each
+              audio clip will be written and collected together in a unified
+              database, to allow each researcher who aims to deal with the
+              Sudanese dialect in the future to overcome the data collection
+              stage.
             </Text>
           </p>
           <p>
@@ -97,13 +98,13 @@ const About: React.FC<{}> = ({}) => {
             </Text>
             <p></p>
             <Text flex={1} mt={1} dir={"auto"}>
-              تعاني لهجات اللغة العربية من فقر المصادر النصوص و الكلام المنطوق،
-              وذلك لصعوبة الحصول عليهما سوياً، أو في بعض الأحيان لا يوجد مصدر
-              محوسب للبيانات مما يجعل مهمة جمع البيانات صعبة ومضنية.{" "}
+              تعاني لهجات اللغة العربية من فقر مصادر النصوص و الكلام ، وذلك
+              لصعوبة الحصول عليهما سوياً، أو في بعض الأحيان لا يوجد مصدر محوسب
+              للبيانات مما يجعل مهمة جمع البيانات صعبة ومضنية.{" "}
             </Text>
             <Text flex={1} mt={1} dir={"rtl"}>
               <Link
-                href="https://www.oook.sd"
+                href="https://oook.sd"
                 target="_blank"
                 rel="From oook.sd"
               >
@@ -122,7 +123,7 @@ const About: React.FC<{}> = ({}) => {
                 target="_blank"
                 rel="From oook.sd"
               >
-                <b> المصدر</b>
+                <b> "المصدر"</b>
               </Link>{" "}
               ، تم حصرها وسيتم كتابة النص المقابل لكل مقطع صوتي وجمعهما معا في
               قاعدة بيانات موحدة، تتيح لكل باحث يهدف لتناول اللهجة السودانية
