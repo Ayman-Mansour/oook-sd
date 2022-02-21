@@ -138,8 +138,8 @@ const About: React.FC<{}> = ({}) => {
           <video
             controls
             preload="metadata"
-            src="/vid/idoc-mock-app-en.mp4"
-            title="/vid/idoc-mock-app-en.mp4"
+            src="/vid/short_tut.mp4"
+            title="/vid//vid/short_tut.mp4"
           />
         </Flex>
       </Wrapper>
