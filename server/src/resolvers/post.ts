@@ -375,7 +375,7 @@ async votableposts(
   select p.*
   from post p
   ${creatorid ? `where p."updaterId" != $1` : ""}
-  ${cursor ? `and p."updatedAt" < $3` : ""}
+  ${cursor ? `and p."createdAt" < $3` : ""}
   order by p."createdAt" DESC
   limit $2
   `,

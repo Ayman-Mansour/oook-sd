@@ -20,21 +20,27 @@ import Router from "next/router";
 import gql from "graphql-tag";
 import { isServer } from "./isServer";
 
-const errorExchange: Exchange = ({ forward }) => (ops$) => {
-  return pipe(
-    forward(ops$),
-    tap(({ error }) => {
-      if (error?.message.includes("not authenticated")) {
-        Router.replace("/login");
-      }
-    })
-  );
-};
+const errorExchange: Exchange =
+  ({ forward }) =>
+  (ops$) => {
+    return pipe(
+      forward(ops$),
+      tap(({ error }) => {
+        if (error?.message.includes("not authenticated")) {
+          Router.replace("/login");
+        }
+      })
+    );
+  };
 
-const cursorPagination = (): Resolver => {
+const cursorPagination = (gqlquery: string): Resolver => {
   return (_parent, fieldArgs, cache, info) => {
     const { parentKey: entityKey, fieldName } = info;
+    // console.log("key   :", entityKey, "field   :", fieldName);
+
     const allFields = cache.inspectFields(entityKey);
+    // console.log("allFields   :", allFields);
+
     const fieldInfos = allFields.filter((info) => info.fieldName === fieldName);
     const size = fieldInfos.length;
     if (size === 0) {
@@ -44,14 +50,14 @@ const cursorPagination = (): Resolver => {
     const fieldKey = `${fieldName}(${stringifyVariables(fieldArgs)})`;
     const isItInTheCache = cache.resolve(
       cache.resolveFieldByKey(entityKey, fieldKey) as string,
-      "posts"
+      gqlquery
     );
     info.partial = !isItInTheCache;
     let hasMore = true;
     const results: string[] = [];
     fieldInfos.forEach((fi) => {
       const key = cache.resolveFieldByKey(entityKey, fi.fieldKey) as string;
-      const data = cache.resolve(key, "posts") as string[];
+      const data = cache.resolve(key, gqlquery) as string[];
       const _hasMore = cache.resolve(key, "hasMore");
       if (!_hasMore) {
         hasMore = _hasMore as boolean;
@@ -99,7 +105,11 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
         },
         resolvers: {
           Query: {
-            posts: cursorPagination(),
+            posts: cursorPagination("posts"),
+            userposts: cursorPagination("posts"),
+            // uservotedposts: cursorPagination("votedposts"),
+            votableposts: cursorPagination("posts"),
+            editableposts: cursorPagination("posts"),
           },
         },
         updates: {

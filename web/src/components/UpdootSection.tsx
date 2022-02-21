@@ -9,9 +9,11 @@ import {
 interface UpdootSectionProps {
   post: PostSnippetFragment;
   updaterid: number
+  direction?: string
+  disabled?: boolean
 }
 
-export const UpdootSection: React.FC<UpdootSectionProps> = ({ post, updaterid }) => {
+export const UpdootSection: React.FC<UpdootSectionProps> = ({ post, updaterid, direction, disabled }) => {
   const [loadingState, setLoadingState] = useState<
     "updoot-loading" | "downdoot-loading" | "not-loading"
   >("not-loading");
@@ -24,8 +26,9 @@ export const UpdootSection: React.FC<UpdootSectionProps> = ({ post, updaterid })
 
   if (meData?.me?.role === "admin" || meData?.me?.role === "Reviewer") {
     return (
-      <Flex dir="row" justifyContent="center" alignItems="center" mr={4}>
+      <Flex direction={direction? "column": "row"}  justifyContent="center" alignItems="center" mr={4}>
         <IconButton
+        isDisabled={disabled}
           m={2}
           onClick={async () => {
             if (post.voteStatus === 1) {
@@ -45,6 +48,7 @@ export const UpdootSection: React.FC<UpdootSectionProps> = ({ post, updaterid })
         />
         {post.points}
         <IconButton
+        isDisabled={disabled}
           m={2}
           onClick={async () => {
             if (post.voteStatus === -1) {

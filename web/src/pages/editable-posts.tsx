@@ -158,7 +158,12 @@ const EditablePosts = () => {
                     // var sum=0.0
                     // sum += element  
                   }}}</Text>  */}
-                  {/* <UpdootSection post={p} /> */}
+                  <UpdootSection
+                    post={vp}
+                    updaterid={vp.updaterId}
+                    direction="column"
+                    disabled={true}
+                  />
                   <Box flexWrap="inherit">
                     <NextLink href="/post?uri=[id]" as={`/post/${vp.id}`}>
                       <Link>
@@ -206,7 +211,7 @@ const EditablePosts = () => {
                   cursor:
                     voteData.votableposts.posts[
                       voteData.votableposts.posts.length - 1
-                    ].updatedAt,
+                    ].createdAt,
                 });
               }}
               isLoading={votefetching}
