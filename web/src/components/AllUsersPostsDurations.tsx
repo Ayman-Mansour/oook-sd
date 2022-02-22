@@ -15,7 +15,8 @@ export const AllUsersPostsDurations = () => {
   var allpostsduration = 172042 as number;
   var percentage = (usersduration / allpostsduration) * 100;
   return (
-    <Flex dir="column" m={2} align={"center"}>
+    <Flex dir="column" m={2} align={"center"} position={"sticky"}>
+      
       <Box>
         <Text fontSize="xl" fontWeight="bold" flex={1}>
           Submited posts :{" "}{calculateTime(durData?.usersdurations[0].sum as number)}
@@ -25,7 +26,7 @@ export const AllUsersPostsDurations = () => {
           Total of all Posts {" "} :{" "} {calculateTime(allpostsduration as number)}
         </Text>
       </Box>
-      <CircularProgress ml={400} value={Math.floor(percentage)} color="orange">
+      <CircularProgress ml={{base:400, md:100}} value={Math.floor(percentage)} color="orange">
         <CircularProgressLabel fontSize={14}>
           {Math.floor(percentage)}%
         </CircularProgressLabel>

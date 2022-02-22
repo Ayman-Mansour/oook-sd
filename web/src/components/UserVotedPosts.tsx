@@ -77,13 +77,13 @@ export const UserVotedrPosts: React.FC<UserVotedPostsprop> = ({
                 </NextLink>
                 <Text>Posted by: {data?.post?.creator.username}</Text>
                 <Flex align="center">
-                  <Text flex={1} mt={4} dir={"auto"}>
+                  <Text flex={1} m={4} dir={"auto"}>
                     {data?.post?.textSnippet}
                   </Text>
                   <ReactAudioPlayer
                     src={audio_path + data?.post?.title + ".wav"}
                     controls
-                    loop
+                    
                   />
                   <Box ml={2}>
                     {/* <EditDeletePostButtons
