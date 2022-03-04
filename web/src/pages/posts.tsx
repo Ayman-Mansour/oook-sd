@@ -78,7 +78,7 @@ const Posts = () => {
   //     ))}
   //   </ul>
   // )
-  const audio_path = path.join(__dirname, "/files/");
+  const audio_path = "https://www.ayman-mansour.com/admin/SUD/"
   // console.log('audio path: ', audio_path)
   if (meData.me.role == "Reviewer") {
     return (
@@ -164,6 +164,7 @@ const Posts = () => {
                       <Flex m={2} align="center">
                         <ReactAudioPlayer
                           src={audio_path + p.title + ".wav"}
+                          title={p.title}
                           controls
                         />
                         <Box ml={2}>

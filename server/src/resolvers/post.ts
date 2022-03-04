@@ -305,7 +305,6 @@ const up = await Updoot.find(({ where: { userId: updaterid }}));
   // where p."userId" = ${updaterId }`
     
   // );
-console.log("returned val", up)
  
 
   return {
@@ -444,7 +443,6 @@ async userdurations(
   // ,
   //   replacements
   );
-console.log("dura", durations_count[0]);
 
   return durations_count
 }

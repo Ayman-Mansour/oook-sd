@@ -52,8 +52,8 @@ const ChangePassword: React.FC<{}> = ({}) => {
                 <Box mr={2} style={{ color: "red" }}>
                   {tokenError}
                 </Box>
-                <NextLink href="/forgot-password">
-                  <Link>click here to get a new one</Link>
+                <NextLink href="/Account/forgot-password">
+                  <Link>{" "} great a new one</Link>
                 </NextLink>
               </Flex>
             ) : null}

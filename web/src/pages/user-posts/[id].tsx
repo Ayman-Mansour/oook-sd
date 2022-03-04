@@ -86,7 +86,7 @@ const UserPostsDetails = () => {
   //     ))}
   //   </ul>
   // )
-  const audio_path = path.join(__dirname, "/files/");
+  const audio_path = "https://www.ayman-mansour.com/admin/SUD/"
   // console.log('audio path: ', audio_path)
 
   return (

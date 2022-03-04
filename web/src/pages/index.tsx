@@ -40,8 +40,7 @@ const Index = () => {
     variables,
   });
 
-  const audio_path = path.join(__dirname, "/files/");
-  // console.log('audio path: ', audio_path)
+  const audio_path = "https://www.ayman-mansour.com/admin/SUD/"
 
   if (!fetching && !data) {
     return (
@@ -53,7 +52,7 @@ const Index = () => {
   }
 
   return (
-    <Layout>
+    <Layout >
       {!data && fetching ? (
         <div>loading...</div>
       ) : (
@@ -71,12 +70,11 @@ const Index = () => {
 
             </Flex>
           </>
-          <SimpleGrid columns={2} spacing={5} flexWrap="wrap">
+          <SimpleGrid columns={1} spacing={5} flexWrap="wrap">
             {data!.posts.posts.map((p) => {
               return !p ? null : (
                 <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
                   {/* <UpdootSection post={p} /> */}
-                  {console.log("Durations : ", data?.posts.posts)}
                   <Box flexWrap="inherit">
                     <NextLink href="/post?uri=[id]" as={`/post/${p.id}`}>
                       <Link>
@@ -93,6 +91,7 @@ const Index = () => {
                         <ReactAudioPlayer
                           src={audio_path + p.title + ".wav"}
                           controls
+                          title={p.title}
                           preload="metadata"
                         />
                         {/* {async () => {

@@ -37,7 +37,7 @@ export const UserPosts: React.FC<UserPostsprop> = ({
   const [{ data: voteData }] = useUserVotedPostsQuery({
     variables,
   });
-  const audio_path = path.join(__dirname, "/files/");
+  const audio_path = "https://www.ayman-mansour.com/admin/SUD/"
   if (userData?.user[0].role == "Reviewer") {
     return (
 
@@ -123,7 +123,7 @@ export const UserPosts: React.FC<UserPostsprop> = ({
                         <ReactAudioPlayer
                           src={audio_path + p.title + ".wav"}
                           controls
-                          loop
+                          title={p.title}
                         />
                         <Box ml={2}>
                           <EditDeletePostButtons

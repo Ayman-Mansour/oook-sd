@@ -51,7 +51,7 @@ export const UserVotedrPosts: React.FC<UserVotedPostsprop> = ({
   //     id : userid
   //   }
   // })
-  const audio_path = path.join(__dirname, "/files/");
+  const audio_path = "https://www.ayman-mansour.com/admin/SUD/"
 
   return (
     <Stack>
@@ -83,6 +83,7 @@ export const UserVotedrPosts: React.FC<UserVotedPostsprop> = ({
                   <ReactAudioPlayer
                     src={audio_path + data?.post?.title + ".wav"}
                     controls
+                    title={data?.post?.title}
                     
                   />
                   <Box ml={2}>

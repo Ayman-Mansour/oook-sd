@@ -24,11 +24,10 @@ import path from "path";
 
 const About: React.FC<{}> = ({}) => {
   const router = useRouter();
-  const audio_path = path.join(__dirname, "/vid/");
   return (
     <Layout>
-      <Wrapper variant="regular">
-        <SimpleGrid columns={2} spacing={10}>
+      <Wrapper variant="regular" >
+        <SimpleGrid columns={2} spacing={10} p={2}>
           <p>
             <Text fontSize="lg" m={2} dir={"auto"}>
               " <b>OOK </b>: is said (<i>OOK</i>) when shouting or making voice
@@ -139,8 +138,8 @@ const About: React.FC<{}> = ({}) => {
           <video
             controls
             preload="metadata"
-            src="/vid/short_tut.mp4"
-            title="/vid//vid/short_tut.mp4"
+            src="https://www.ayman-mansour.com/admin/short_tut.mp4"
+            title="short_tut.mp4"
           />
         </Flex>
       </Wrapper>

@@ -59,7 +59,7 @@ const EditablePosts = () => {
   const [, deActivateUser] = useDeactivateUserMutation();
 
   var uid;
-  const audio_path = path.join(__dirname, "/files/");
+  const audio_path = "https://www.ayman-mansour.com/admin/SUD/"
   // console.log('audio path: ', audio_path)
 
   if (!fetching && !data) {
@@ -87,7 +87,7 @@ const EditablePosts = () => {
         {!data && fetching ? (
           <div>loading...</div>
         ) : (
-          <SimpleGrid columns={2} spacing={5} flexWrap="wrap">
+          <SimpleGrid columns={1} spacing={5} flexWrap="wrap">
             {usersData?.users?.map((u) => {
               return !u ? null : (
                 <Flex key={u.id} p={5} shadow="md" borderWidth="1px">
@@ -114,7 +114,6 @@ const EditablePosts = () => {
                           icon="unlock"
                           aria-label="Activate User"
                           onClick={() => {
-                            console.log("User Activated", u.username);
 
                             activateUser({ id: u.id });
                           }}
@@ -124,7 +123,6 @@ const EditablePosts = () => {
                           icon="not-allowed"
                           aria-label="Deactivate User"
                           onClick={() => {
-                            console.log("User Deactivated", u.username);
                             deActivateUser({ id: u.id });
                           }}
                         />
@@ -146,18 +144,11 @@ const EditablePosts = () => {
         {!voteData && votefetching ? (
           <div>loading...</div>
         ) : (
-          <SimpleGrid columns={2} spacing={5} flexWrap="wrap">
+          <SimpleGrid columns={1} spacing={5} flexWrap="wrap">
             {voteData?.votableposts.posts.map((vp) => {
               return !vp ? null : (
                 <Flex key={vp.id} p={5} shadow="md" borderWidth="1px">
-                  {/* <Text>Durations {duration.push(p?.duration)}</Text>  */}
-                  {/* <Text>Durations {async () =>{for (let index = 0; index < duration.length; index++) {
-                    const element = duration[index];
-                    console.log("Durations : ",element);
-                    
-                    // var sum=0.0
-                    // sum += element  
-                  }}}</Text>  */}
+                  
                   <UpdootSection
                     post={vp}
                     updaterid={vp.updaterId}
@@ -180,6 +171,7 @@ const EditablePosts = () => {
                         <ReactAudioPlayer
                           src={audio_path + vp.title + ".wav"}
                           controls
+                          title= {vp.title}
                           preload="metadata"
                         />
                         {/* {async () => {
@@ -230,7 +222,7 @@ const EditablePosts = () => {
         {!data && fetching ? (
           <div>loading...</div>
         ) : (
-          <SimpleGrid columns={2} spacing={5} flexWrap="wrap">
+          <SimpleGrid columns={1} spacing={5} flexWrap="wrap">
             {data?.editableposts.posts.map((p) => {
               return !p ? null : (
                 <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
@@ -250,6 +242,7 @@ const EditablePosts = () => {
                         <ReactAudioPlayer
                           src={audio_path + p.title + ".wav"}
                           controls
+                          title={p.title}
                           preload="metadata"
                         />
                         {/* {async () => {

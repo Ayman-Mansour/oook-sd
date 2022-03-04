@@ -2,7 +2,7 @@ import React from "react";
 import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "../../utils/createUrqlClient";
 import { Layout } from "../../components/Layout";
-import { Heading, Box, Text, Flex, Stack, List } from "@chakra-ui/core";
+import { Heading, Box, Text, Flex, Stack, List, Textarea } from "@chakra-ui/core";
 import { useGetPostFromUrl } from "../../utils/useGetPostFromUrl";
 import { EditDeletePostButtons } from "../../components/EditDeletePostButtons";
 import ReactAudioPlayer from "react-audio-player";
@@ -13,7 +13,7 @@ import { UpdootSection } from "../../components/UpdootSection";
 const Post = ({}) => {
   const [{ data, error, fetching }] = useGetPostFromUrl();
   const [{ data: meData }] = useMeQuery();
-  const audio_path = path.join(__dirname, "/files/");
+  const audio_path = "https://www.ayman-mansour.com/admin/SUD/"
   // console.log('audio path: ', audio_path)
   if (fetching) {
     return (
@@ -36,20 +36,22 @@ const Post = ({}) => {
   }
 
   return (
-    <Layout>
+    <Layout variant="small">
       <Flex p={10} shadow="md" borderWidth="1px">
         <Stack spacing={10}>
-          <Heading fontSize="3xl" mb={4}>{data.post.title}</Heading>
+          <Heading fontSize="xl" mb={4}>{data.post.title}</Heading>
           <Box p={2}  dir='column'>
           <Text>Posted by : {data.post.creator.username}</Text>{" "}
           <Text>Post Evaluation = {data.post.points}</Text>
           </Box>
-          <Box mb={4} dir={"auto"}>{data.post.text}</Box>
-          <Stack p={10} direction="column">
+          <Box mb={4} dir={"auto"}>
+            <Text> {data.post.text}</Text>
+            </Box>
+          <Stack p={5} direction="column">
             <ReactAudioPlayer
               src={audio_path + data.post.title + ".wav"}
+              title={data.post.title}
               controls
-              loop
             />
             <Flex p={2} alignSelf="center" direction={'column'}>
               <EditDeletePostButtons

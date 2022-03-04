@@ -41,9 +41,8 @@ const EditPost = ({}) => {
       </Layout>
     );
   }
-  const audio_path = path.join(__dirname, "/files/");
+  const audio_path = "https://www.ayman-mansour.com/admin/SUD/"
 
-  console.log("My Role : ", userData?.user[0].role);
   
   if (meData?.me?.id == null || meData.me.active == "0") {
     return (
@@ -98,10 +97,7 @@ const EditPost = ({}) => {
                 const response = await updatePost({ options: values });
                 if (response.data?.updatePost.errors) {
                   setErrors(toPostErrorMap(response.data.updatePost.errors));
-                  console.log(
-                    "update error : ",
-                    toPostErrorMap(response.data.updatePost.errors)
-                  );
+                  
                 }
                  else if (!response.data?.updatePost.errors) {
                   // worked

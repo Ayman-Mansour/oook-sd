@@ -73,11 +73,9 @@ export class UserResolver {
 
     const key =  _token;
     // const userId = await redis.get(key);
-    console.log("Token key :::::::::::::::::", key);
 
     const userId = await Token.findOne({ where: { token: key } });
 
-    console.log("Token userId :::::::::::::::::", userId);
 
     if (!userId) {
       return {
@@ -155,7 +153,6 @@ export class UserResolver {
       tken = result.raw[0];
       console.log("Token", tken);
     } catch (err) {
-      console.log("Token Error:::::::::::::::::", err.message);
 
       //|| err.detail.includes("already exists")) {
       // duplicate username error
@@ -180,7 +177,7 @@ export class UserResolver {
     await sendEmail(
       email,
       `Dear ${user.username} , <br /> Click on the following link to create new password for you oook account:
-      <br /> <a href="http://localhost:3000/Account/change-password/${token}">Reset password</a>
+      <br /> <a href="https://www.oook.sd/Account/change-password/${token}">Reset password</a>
       <br /> Note: This link will be functional for a one time use or 3 days (whichever is earlier)
       <br /> With regards, <br /> OOOK Team.`
     );
@@ -210,7 +207,7 @@ export class UserResolver {
     ${id ? `where u.id = $1` : ""}`,
       replacement
     );
-    console.log("User : ", user);
+    // console.log("User : ", user);
 
     return user;
   }
@@ -339,8 +336,7 @@ export class UserResolver {
     }
     // const hashedPassword = await passwordHash.generate(password);
     const valid = await passwordHash.verify(password, user.password);
-    console.log("input pass : ", password);
-    console.log("user pass : ", user.password);
+
     // console.log("hashed pass : ",hashedPassword);
 
     // const valid = await argon2.verify(user.password, password);
